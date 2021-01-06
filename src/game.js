@@ -55,7 +55,7 @@ class Game {
             ele.classList.remove('off');
           }
         }
-        ele.addEventListener('click', handleClick);
+        ele.addEventListener('mousedown', handleClick);
 
         const handleMouseover = e => {
           if (e.buttons == 1 || e.buttons == 3) {
