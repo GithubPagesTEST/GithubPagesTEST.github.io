@@ -45,6 +45,7 @@ class Game {
       for (let j = 0; j < this.eleArr[0].length; j++) {
         const ele = this.eleArr[i][j];
         const handleClick = e => {
+          console.log([i, j])
           if (this.board[i] && this.board[i][j]) {
             this.board[i][j] = false;
             ele.classList.add('off');
@@ -58,6 +59,7 @@ class Game {
         ele.addEventListener('mousedown', handleClick);
 
         const handleMouseover = e => {
+          console.log([i,j])
           if (e.buttons == 1 || e.buttons == 3) {
             if (this.board[i] && this.board[i][j]) {
               this.board[i][j] = false;
