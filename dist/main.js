@@ -1,1 +1,113 @@
-!function(t){var e={};function r(o){if(e[o])return e[o].exports;var s=e[o]={i:o,l:!1,exports:{}};return t[o].call(s.exports,s,s.exports,r),s.l=!0,s.exports}r.m=t,r.c=e,r.d=function(t,e,o){r.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:o})},r.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},r.t=function(t,e){if(1&e&&(t=r(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var o=Object.create(null);if(r.r(o),Object.defineProperty(o,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var s in t)r.d(o,s,function(e){return t[e]}.bind(null,s));return o},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r.p="",r(r.s=0)}([function(t,e,r){"use strict";r.r(e);const o=[[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1]];var s=class{constructor(t,e,r){this.DIM_X=t,this.DIM_Y=e,this.board=Array.from({length:e},()=>Array.from({length:t},()=>!1)),this.ele=r,this.buildBoard(),this.setupListeners()}buildBoard(){const t=this.ele;this.eleArr=[];for(let e=0;e<this.DIM_Y;e++){const r=document.createElement("tr"),o=[];r.id=e,r.classList.add("row");for(let t=0;t<this.DIM_X;t++){const s=document.createElement("td");s.id=`${t},${e}`,s.classList.add("cell","off"),r.appendChild(s),o.push(s)}t.appendChild(r),this.eleArr.push(o)}}setupListeners(){for(let t=0;t<this.eleArr.length;t++)for(let e=0;e<this.eleArr[0].length;e++){const r=this.eleArr[t][e],o=o=>{console.log([t,e]),this.board[t]&&this.board[t][e]?(this.board[t][e]=!1,r.classList.add("off"),r.classList.remove("on")):(this.board[t][e]=!0,r.classList.add("on"),r.classList.remove("off"))};r.addEventListener("mousedown",o);const s=o=>{console.log([t,e]),1!=o.buttons&&3!=o.buttons||(this.board[t]&&this.board[t][e]?(this.board[t][e]=!1,r.classList.add("off"),r.classList.remove("on")):(this.board[t][e]=!0,r.classList.add("on"),r.classList.remove("off")))};r.addEventListener("mouseover",s)}}neighborCoords(t,e){const r=o.map(([r,o])=>[t+r,e+o]);for(let t=0;t<r.length;t++){const e=r[t];e[0]==this.DIM_X&&(e[0]=0),e[1]==this.DIM_Y&&(e[1]=0)}return r}numOnNeighbors(t,e){const r=this.neighborCoords(t,e);let o=0;for(let t=0;t<r.length;t++){const[e,s]=r[t];this.board[s]&&this.board[s][e]&&(o+=1)}return o}runRound(){const t=[],e=[];for(let r=0;r<this.board.length;r++)for(let o=0;o<this.board[0].length;o++){const s=this.numOnNeighbors(o,r);this.board[o][r]?(s<2||s>3)&&e.push([o,r]):3===s&&t.push([r,o])}t.forEach(([t,e])=>{this.board[t][e]=!0}),e.forEach(([t,e])=>{this.board[t][e]=!1})}render(){for(let t=0;t<this.board.length;t++)for(let e=0;e<this.board[0].length;e++){const r=this.eleArr[t][e];this.board[t]&&this.board[t][e]?(r.classList.add("on"),r.classList.remove("off")):(r.classList.add("off"),r.classList.remove("on"))}}run(t){this.intId=setInterval(()=>{this.runRound(),this.render()},t)}};const{x:n,y:i}={x:50,y:50},d=new s(n,i,document.getElementById("board"));document.getElementById("start").addEventListener("click",t=>{d.run(500)}),document.getElementById("stop").addEventListener("click",t=>{clearInterval(d.intId)})}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/game.js":
+/*!*********************!*\
+  !*** ./src/game.js ***!
+  \*********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nconst DIRS = [\n  [0,-1],\n  [1,-1],\n  [1,0],\n  [1,1],\n  [0,1],\n  [-1,1],\n  [-1,0],\n  [-1,-1]\n]\n\nclass Game {\n  constructor(x,y,ele) {\n    this.DIM_X = x;\n    this.DIM_Y = y;\n    this.board = Array.from({ length: y }, () => Array.from({ length: x }, () => false));\n    this.ele = ele;\n\n    this.buildBoard();\n    this.setupListeners();\n  }\n\n  buildBoard() {\n    const table = this.ele;\n    this.eleArr = [];\n    for (let i = 0; i < this.DIM_Y; i++) {\n      const row = document.createElement('tr');\n      const eleRow = [];\n      row.id = i;\n      row.classList.add('row');\n      for (let j = 0; j < this.DIM_X; j++) {\n        const cell = document.createElement('td');\n        cell.id = `${j},${i}`;\n        cell.classList.add('cell', 'off')\n        row.appendChild(cell);\n        eleRow.push(cell);\n      }\n      table.appendChild(row);\n      this.eleArr.push(eleRow);\n    }\n  }\n\n  setupListeners() {\n    for (let i = 0; i < this.eleArr.length; i++) {\n      for (let j = 0; j < this.eleArr[0].length; j++) {\n        const ele = this.eleArr[i][j];\n        const handleClick = e => {\n          if (this.board[i] && this.board[i][j]) {\n            this.board[i][j] = false;\n            ele.classList.add('off');\n            ele.classList.remove('on');\n          } else {\n            this.board[i][j] = true;\n            ele.classList.add('on');\n            ele.classList.remove('off');\n          }\n        }\n        ele.addEventListener('mousedown', handleClick);\n\n        const handleMouseover = e => {\n          if (e.buttons == 1 || e.buttons == 3) {\n            if (this.board[i] && this.board[i][j]) {\n              this.board[i][j] = false;\n              ele.classList.add('off');\n              ele.classList.remove('on');\n            } else {\n              this.board[i][j] = true;\n              ele.classList.add('on');\n              ele.classList.remove('off');\n            }\n          }\n        }\n\n        ele.addEventListener('mouseover', handleMouseover);\n      }\n    }\n  }\n\n  neighborCoords(x,y) {\n    const nbrArr = DIRS.map(([dx, dy]) => [x + dx, y + dy]);\n    for (let i = 0; i < nbrArr.length; i++) {\n      const nbr = nbrArr[i];\n      if (nbr[0] == this.DIM_X) {\n        nbr[0] = 0;\n      }     \n      if (nbr[1] == this.DIM_Y) {\n        nbr[1] = 0;\n      }     \n    }\n    return nbrArr;\n  }\n\n  numOnNeighbors(x,y) {\n    const nbrs = this.neighborCoords(x,y);\n    let count = 0;\n    for (let i = 0; i < nbrs.length; i++) {\n      const [nbrX, nbrY] = nbrs[i];\n      if (this.board[nbrY] && this.board[nbrY][nbrX]) {\n        count += 1;\n      }\n    }\n    return count;\n  }\n\n  runRound() {\n    const toOn = [];\n    const toOff = [];\n    for (let i = 0; i < this.board.length; i++) {\n      for (let j = 0; j < this.board[0].length; j++) {\n        const nbrsOn = this.numOnNeighbors(j, i);\n        if (this.board[i][j]) {\n          if (nbrsOn < 2 || nbrsOn > 3) {\n            toOff.push([i,j])\n          }\n        } else {\n          if (nbrsOn === 3) {\n            toOn.push([i,j])\n          }\n        }\n      }\n    }\n\n    toOn.forEach(([y,x]) => {\n      this.board[y][x] = true;\n    })\n    toOff.forEach(([y,x]) => {\n      this.board[y][x] = false;\n    })\n\n  }\n\n  render() {\n    for (let i = 0; i < this.board.length; i++) {\n      for (let j = 0; j < this.board[0].length; j++) {\n        const ele = this.eleArr[i][j];\n        if (this.board[i] && this.board[i][j]) {\n          ele.classList.add('on');\n          ele.classList.remove('off');\n        } else {\n          ele.classList.add('off');\n          ele.classList.remove('on');\n        }\n      }\n    }\n  }\n\n  run(interval) {\n    this.intId = setInterval(() => {\n      this.runRound();\n      this.render();\n    }, interval);\n  }\n}\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Game);\n\n//# sourceURL=webpack:///./src/game.js?");
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game.js */ \"./src/game.js\");\n\n\nconst { x, y } = {\n  x: 50,\n  y: 50\n}\n\nconst game = new _game_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](x,y,document.getElementById('board'));\n\ndocument.getElementById('start').addEventListener('click', e => {\n  game.run(500);\n})\n\ndocument.getElementById('stop').addEventListener('click', e => {\n  clearInterval(game.intId);\n})\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ })
+
+/******/ });
