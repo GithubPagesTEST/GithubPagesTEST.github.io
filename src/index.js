@@ -8,9 +8,9 @@ const { x, y } = {
 const game = new Game(x,y,document.getElementById('board'));
 
 document.getElementById('start').addEventListener('click', e => {
-  game.run(500);
+  game.run(5);
 })
 
 document.getElementById('stop').addEventListener('click', e => {
-  clearInterval(game.intId);
+  game.stop();
 })

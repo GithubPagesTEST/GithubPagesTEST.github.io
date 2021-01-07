@@ -145,10 +145,19 @@ class Game {
   }
 
   run(interval) {
+    if (this.running) {
+      return;
+    }
+    this.running = true;
     this.intId = setInterval(() => {
       this.runRound();
       this.render();
     }, interval);
+  }
+
+  stop() {
+    clearInterval(this.intId);
+    this.running = false;
   }
 }
 
